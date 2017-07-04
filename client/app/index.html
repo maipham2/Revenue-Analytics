@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title></title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="styles/main.css">
+   </head>
+   <body ng-app="clientApp" ng-controller="chartController">
+   <div class="container-fluid">
+      <div ng-show="showError" class="alert alert-warning">Error getting data</div>
+      <div class = "row" >
+         <div class = "col-lg-8 col-sm-16">
+            <h4>Fiscal Year</h4>
+            <select class = "selectpicker"
+               ng-init="selectedYear= selectedYear || years[0]"
+               ng-model="selectedYear" 
+               ng-options="x for x in years" 
+               ng-change="update()"></select>
+         </div>
+         <div class="col-lg-6 col-sm-12">
+            <canvas id="pie" 
+               class="chart chart-pie chart-xs ng-isolate-scope col-lg-6 col-sm-12" 
+               chart-data="chartData" 
+               chart-labels="chartLabels" 
+               chart-click="onClickSlice"
+               chart-options="chartOptions"
+               >
+            </canvas>
+         </div>
+         <div class="col-lg-6 col-sm-12 table-responsive" ng-show="showDataGrid">
+            <h4>{{dataGridTitle}}</h4>
+            <table class="table table-responsive table-condensed">
+               <thead>
+                  <tr>
+                     <th ng-repeat="label in gridLabels">{{label}}</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat="dataSet in gridData">
+                     <td ng-repeat="set in dataSet track by $index"><span style="text-align: right;">{{gridData[$parent.$index][$index]}}</span></td>
+                  </tr>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+      <div class="footer">
+            <p>By Valerie Pham</p>
+      </div>
+   </div>
+
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/chart.js/dist/Chart.js"></script>
+      <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-route/angular-route.js"></script> 
+      <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+      <script src="scripts/app.js"></script>
+      <script src="scripts/controllers/main.js"></script>
+   </body>
+</html>
